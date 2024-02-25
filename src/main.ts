@@ -1,12 +1,3 @@
-import "./style.css";
+import Game from "./lib/Game";
 
-/**
- *
- * @param t the end time of the previous frame's rendering
- */
-function main(t: DOMHighResTimeStamp) {
-  window.requestAnimationFrame(main);
-  console.log(t, typeof t);
-}
-
-window.requestAnimationFrame(main);
+new Game();
