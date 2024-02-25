@@ -1,0 +1,4 @@
+.game-square {
+  border: 0.125vmin solid black;
+  border-radius: 5px;
+}
