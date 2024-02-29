@@ -1,8 +1,9 @@
 {
   "name": "snek",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
+  "homepage": "https://r0b4dams.github.io/snek",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
