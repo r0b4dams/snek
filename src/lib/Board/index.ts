@@ -37,8 +37,11 @@ export class Board {
       y: midpoint,
     };
 
-    Object.entries(this.attributes).forEach(([k, a]) => {
-      this.element.setAttribute(k, a.toString());
+    this.element.style.gridTemplateRows = `repeat(${this.attributes["data-size"]}, 1fr)`;
+    this.element.style.gridTemplateColumns = `repeat(${this.attributes["data-size"]}, 1fr)`;
+
+    Object.entries(this.attributes).forEach(([key, attr]) => {
+      this.element.setAttribute(key, attr.toString());
     });
 
     parentElement.append(this.element);
@@ -49,11 +52,26 @@ export class Board {
   }
 
   square({ x, y }: Coordinates) {
-    return document.querySelector(
-      `
-        #${this.attributes.id}[data-x='${x}'], 
-        #${this.attributes.id}[data-y='${y}']
-        `
-    ) as HTMLDivElement;
+    return document.querySelector(`.game-square[data-x='${x}'][data-y='${y}']`);
+  }
+
+  randomSingleCoordinate() {
+    return Math.floor(Math.random() * this.attributes["data-size"]) + 1;
+  }
+
+  randomGridPosition() {
+    return {
+      x: this.randomSingleCoordinate(),
+      y: this.randomSingleCoordinate(),
+    };
+  }
+
+  outsideGrid({ x, y }: Coordinates) {
+    return (
+      x < 1 ||
+      x > this.attributes["data-size"] ||
+      y < 1 ||
+      y > this.attributes["data-size"]
+    );
   }
 }
