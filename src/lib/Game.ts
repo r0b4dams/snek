@@ -12,7 +12,7 @@ export default class Game {
   private prevTime = 0;
   private frameId: number | null = null;
 
-  constructor(public speed: number = 1) {
+  constructor(public speed: number = 3) {
     this.ctlr = new InputController();
     this.board = new Board("main");
     this.snake = new Snake(this.board.center);
