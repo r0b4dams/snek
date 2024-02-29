@@ -1,6 +1,11 @@
+:root {
+  --board-size: min(100vh, 100vw);
+}
+
 #board {
-  width: 100vmin;
-  height: 100vmin;
+  height: var(--board-size);
+  width: var(--board-size);
+  margin: auto;
   display: grid;
   grid-template-rows: repeat(21, 1fr);
   grid-template-columns: repeat(21, 1fr);
