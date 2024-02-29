@@ -3,13 +3,13 @@ import { Board } from "../Board";
 import { Coordinates } from "../../@types";
 
 export class Square {
-  protected element: HTMLDivElement;
+  public element: HTMLDivElement;
 
   constructor(type: string, board: Board, { x, y }: Coordinates) {
     this.element = document.createElement("div");
     this.element.classList.add("game-square");
 
-    const color = type === "snake" ? "blue" : "yellow";
+    const color = type === "snake" ? "chartreuse" : "salmon";
     this.element.style.backgroundColor = color;
 
     this.element.setAttribute("data-type", type);
