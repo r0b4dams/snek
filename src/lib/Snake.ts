@@ -18,27 +18,44 @@ export class Snake {
     return this.body[this.body.length - 1];
   }
 
-  peek(direction: Coordinates) {
+  isTail(c: Coordinates) {
+    return c.x === this.tail.x && c.y === this.tail.y;
+  }
+
+  check(c: Coordinates) {
+    const x = this.head.x + c.x;
+    const y = this.head.y + c.y;
+
+    const element =
+      (c.x === 0 && c.y === 0) || this.isTail({ x, y })
+        ? null
+        : document.querySelector(`[data-x='${x}'][data-y='${y}']`);
+
     return {
-      x: this.head.x + direction.x,
-      y: this.head.y + direction.y,
-    } as Coordinates;
+      element,
+      coordinates: { x, y },
+    };
   }
 
   move(direction: Coordinates) {
-    const tail = this.body.pop();
+    const copy = [...this.body];
+    const newHead = copy.pop()!;
 
-    if (!tail) {
+    if (!newHead) {
       throw new Error("error moving snake");
     }
 
-    tail.x += direction.x;
-    tail.y += direction.y;
+    newHead.x = this.head.x + direction.x;
+    newHead.y = this.head.y + direction.y;
 
-    this.body = [tail, ...this.body];
+    this.body = [newHead, ...copy];
   }
 
-  eat() {
-    this.body.push({ x: this.tail.x, y: this.tail.y });
+  stop() {
+    this.move({ x: 0, y: 0 });
+  }
+
+  grow() {
+    this.body.push({ ...this.tail });
   }
 }
