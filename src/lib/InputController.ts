@@ -1,13 +1,13 @@
 import { Coordinates } from "../@types";
 
-const DIRECTION = {
+export const DIRECTION = {
   UP: "ArrowUp",
   DOWN: "ArrowDown",
   LEFT: "ArrowLeft",
   RIGHT: "ArrowRight",
-} as const;
+};
 
-const MOVESET = {
+export const MOVESET = {
   [DIRECTION.UP]: { x: 0, y: -1 },
   [DIRECTION.DOWN]: { x: 0, y: 1 },
   [DIRECTION.LEFT]: { x: -1, y: 0 },
