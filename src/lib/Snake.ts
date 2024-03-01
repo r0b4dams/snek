@@ -18,6 +18,10 @@ export class Snake {
     return this.body[this.body.length - 1];
   }
 
+  isHead(c: Coordinates) {
+    return c.x === this.head.x && c.y === this.head.y;
+  }
+
   isTail(c: Coordinates) {
     return c.x === this.tail.x && c.y === this.tail.y;
   }
@@ -37,6 +41,10 @@ export class Snake {
     };
   }
 
+  grow() {
+    this.body.push({ ...this.tail });
+  }
+
   move(direction: Coordinates) {
     const copy = [...this.body];
     const newHead = copy.pop()!;
@@ -49,13 +57,11 @@ export class Snake {
     newHead.y = this.head.y + direction.y;
 
     this.body = [newHead, ...copy];
+
+    return this.head;
   }
 
   stop() {
     this.move({ x: 0, y: 0 });
-  }
-
-  grow() {
-    this.body.push({ ...this.tail });
   }
 }
