@@ -4,13 +4,11 @@ import { Coordinates } from "../../@types";
 interface BoardAttributes {
   id: string;
   "data-size": number;
-  "data-color": string;
 }
 
 const defaultAttrs: BoardAttributes = {
   id: "board",
   "data-size": 21,
-  "data-color": "lightgray",
 };
 
 export class Board {
@@ -51,8 +49,14 @@ export class Board {
     this.element.innerHTML = "";
   }
 
-  square({ x, y }: Coordinates) {
-    return document.querySelector(`.game-square[data-x='${x}'][data-y='${y}']`);
+  elements({ x, y }: Coordinates) {
+    return Array.from(
+      document.querySelectorAll(`.game-square[data-x='${x}'][data-y='${y}']`)
+    );
+  }
+
+  isOccupied(c: Coordinates) {
+    return this.elements(c).length > 0;
   }
 
   randomSingleCoordinate() {
@@ -63,10 +67,10 @@ export class Board {
     return {
       x: this.randomSingleCoordinate(),
       y: this.randomSingleCoordinate(),
-    };
+    } as Coordinates;
   }
 
-  outsideGrid({ x, y }: Coordinates) {
+  isOutsideGrid({ x, y }: Coordinates) {
     return (
       x < 1 ||
       x > this.attributes["data-size"] ||
