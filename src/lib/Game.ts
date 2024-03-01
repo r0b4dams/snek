@@ -14,7 +14,7 @@ export default class Game {
   private frameId: number | null = null;
   private gameover: boolean;
 
-  constructor(public speed: number = 1) {
+  constructor(public speed: number = 5) {
     this.ctlr = new InputController();
     this.board = new Board("main");
     this.snake = new Snake(this.board.center);
